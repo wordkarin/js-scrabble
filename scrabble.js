@@ -101,6 +101,12 @@ Scoring.highestScoreFrom = function (arrayOfWords) {
   }
 };
 
+//
+// Player class starts here.
+//
+
+
+
 
 
 Scrabble.prototype.helloWorld = function() {
@@ -108,6 +114,7 @@ Scrabble.prototype.helloWorld = function() {
 };
 
 module.exports = Scrabble;
+
 
 
 // Here is where you run the program?
