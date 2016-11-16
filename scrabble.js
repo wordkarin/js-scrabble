@@ -141,12 +141,12 @@ Player.prototype.hasWon = function() {
 
 Player.prototype.highestScoringWord = function () {
   // highestScoringWord(): Function which returns the highest scoring word the user has played
-
+  return Scoring.highestScoreFrom(this.plays);
 };
 
 Player.prototype.highestWordScore = function () {
   // highestWordScore(): Function which returns the highestScoringWord score
-
+  return Scoring.score(this.highestScoringWord());
 };
 
 
@@ -181,8 +181,12 @@ console.log(newPlayer.name + "'s score is now " + newPlayer.totalScore + ".");
 
 console.log(newPlayer.name + " has now won: " + newPlayer.hasWon() + ".");
 
-newPlayer.play("kittens");
-console.log(newPlayer.name + " has now played " + newPlayer.plays + " and has a score of " + newPlayer.totalScore + ".");
+console.log("Since " + newPlayer.name + " has already won, " + newPlayer.play("kittens") + " should be false." );
+
+console.log(newPlayer.highestScoringWord());
+
+console.log(newPlayer.name + "'s highest scoring word is: " + newPlayer.highestScoringWord() + ", with a score of " + newPlayer.highestWordScore() + ".");
+
 
 console.log("================scoring below================");
 //I can get back the score of the letter.
