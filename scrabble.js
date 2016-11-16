@@ -114,15 +114,16 @@ var Player = function(name) {
   this.name = name;
   this.plays = [];
   this.totalScore = 0;
-  this.hasWon = false;
 };
 
 Player.prototype.play = function(word) {
   // play(word): Function which adds the input word to the plays Array
   // Returns false if player has already won
-  if (this.hasWon === false) {
+  if (this.hasWon() === false) {
     // add a word to the plays array
+    this.plays.push(word);
     // add the score of the word to totalScore
+    this.totalScore += Scoring.score(word);
   } else {
     return false;
   }
@@ -130,10 +131,11 @@ Player.prototype.play = function(word) {
 
 Player.prototype.hasWon = function() {
   // hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
-  if (this.totalScore <= 100) {
-    return false;
-  } else {
+  if (this.totalScore > 100) {
+    // return this.totalScore;
     return true;
+  } else {
+    return false;
   }
 };
 
@@ -161,8 +163,26 @@ module.exports = Scrabble;
 console.log("================player below================");
 var newPlayer = new Player("Jane");
 console.log(newPlayer.name);
-console.log("New player's score is " + newPlayer.totalScore + " (should be 0).")
+console.log("New player's score is " + newPlayer.totalScore + " (should be 0).");
 
+newPlayer.play("cat");
+console.log(newPlayer.name + " has now played " + newPlayer.plays + " and has a score of " + newPlayer.totalScore + ".");
+
+newPlayer.play("meow");
+console.log(newPlayer.name + " has now played " + newPlayer.plays + " and has a score of " + newPlayer.totalScore + ".");
+
+newPlayer.play("aarrghh");
+console.log(newPlayer.name + " has now played " + newPlayer.plays + " and has a score of " + newPlayer.totalScore + ".");
+
+newPlayer.play("kittens");
+console.log(newPlayer.name + " has now played " + newPlayer.plays + " and has a score of " + newPlayer.totalScore + ".");
+
+console.log(newPlayer.name + "'s score is now " + newPlayer.totalScore + ".");
+
+console.log(newPlayer.name + " has now won: " + newPlayer.hasWon() + ".");
+
+newPlayer.play("kittens");
+console.log(newPlayer.name + " has now played " + newPlayer.plays + " and has a score of " + newPlayer.totalScore + ".");
 
 console.log("================scoring below================");
 //I can get back the score of the letter.
