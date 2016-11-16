@@ -32,9 +32,7 @@ var letterScores = {
   Z: 10,
 };
 
-var Scoring = function() {
-
-};
+var Scoring = function() {};
 
 // add a function (score word) to the class for scoring, that takes in a string word and returns a score for that word.
 Scoring.score = function(word) {
@@ -106,6 +104,48 @@ Scoring.highestScoreFrom = function (arrayOfWords) {
 //
 
 
+// Create a new Player object. The object should have the following functions:
+
+// Constructor: Called when you use new Player(name), sets up an instance with the instance variable name assigned
+var Player = function(name) {
+  // name: property which returns the value of the player's name
+  // plays: property which returns an Array of the words played by the player
+  // totalScore(): Function which sums up and returns the score of the players words
+  this.name = name;
+  this.plays = [];
+  this.totalScore = 0;
+  this.hasWon = false;
+};
+
+Player.prototype.play = function(word) {
+  // play(word): Function which adds the input word to the plays Array
+  // Returns false if player has already won
+  if (this.hasWon === false) {
+    // add a word to the plays array
+    // add the score of the word to totalScore
+  } else {
+    return false;
+  }
+};
+
+Player.prototype.hasWon = function() {
+  // hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
+  if (this.totalScore <= 100) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+Player.prototype.highestScoringWord = function () {
+  // highestScoringWord(): Function which returns the highest scoring word the user has played
+
+};
+
+Player.prototype.highestWordScore = function () {
+  // highestWordScore(): Function which returns the highestScoringWord score
+
+};
 
 
 
@@ -118,6 +158,13 @@ module.exports = Scrabble;
 
 
 // Here is where you run the program?
+console.log("================player below================");
+var newPlayer = new Player("Jane");
+console.log(newPlayer.name);
+console.log("New player's score is " + newPlayer.totalScore + " (should be 0).")
+
+
+console.log("================scoring below================");
 //I can get back the score of the letter.
 console.log(letterScores.Q);
 var letter = "Q";
