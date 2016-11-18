@@ -32,10 +32,8 @@ var letterScores = {
   Z: 10,
 };
 
-var Scoring = function() {};
-
 // add a function (score word) to the class for scoring, that takes in a string word and returns a score for that word.
-Scoring.score = function(word) {
+Scrabble.score = function(word) {
   var wordScore = 0;
   // accounting for case insensitivity somehow (in ruby version, had another function that validated the word and made it all upcase, I'm just upcasing the word here, not validating it to be a string)
   var upWord = word.toUpperCase();
@@ -59,7 +57,7 @@ Scoring.score = function(word) {
 };
 
 // add a function to the scoring class called: highestScoreFrom(arrayOfWords): returns the word in the array with the highest score.
-Scoring.highestScoreFrom = function (arrayOfWords) {
+Scrabble.highestScoreFrom = function (arrayOfWords) {
   // Note that it’s better to use fewer tiles, so if the top score is tied between multiple words, pick the one with the fewest letters.
   // Store the words and their scores in an object.
   var maxScore = 0;
@@ -67,7 +65,7 @@ Scoring.highestScoreFrom = function (arrayOfWords) {
 
   for (var i = 0; i < arrayOfWords.length; i++) {
     var word = arrayOfWords[i];
-    var score = Scoring.score(word);
+    var score = Scrabble.score(word);
       if (score > maxScore) {
         maxScoreWords = [word];
         maxScore = score;
@@ -123,7 +121,7 @@ Player.prototype.play = function(word) {
     // add a word to the plays array
     this.plays.push(word);
     // add the score of the word to totalScore
-    this.totalScore += Scoring.score(word);
+    this.totalScore += Scrabble.score(word);
   } else {
     return false;
   }
@@ -141,12 +139,12 @@ Player.prototype.hasWon = function() {
 
 Player.prototype.highestScoringWord = function () {
   // highestScoringWord(): Function which returns the highest scoring word the user has played
-  return Scoring.highestScoreFrom(this.plays);
+  return Scrabble.highestScoreFrom(this.plays);
 };
 
 Player.prototype.highestWordScore = function () {
   // highestWordScore(): Function which returns the highestScoringWord score
-  return Scoring.score(this.highestScoringWord());
+  return Scrabble.score(this.highestScoringWord());
 };
 
 
@@ -200,23 +198,23 @@ var s = new Scrabble();
 console.log(s.helloWorld());
 
 // var scoring = new Scoring();
-console.log("cat score is " + Scoring.score("cat"));
-console.log("meow score is " + Scoring.score("meow"));
-console.log("grape score is " + Scoring.score("grape"));
-console.log("aarrghh score is " + Scoring.score("aarrghh"));
+console.log("cat score is " + Scrabble.score("cat"));
+console.log("meow score is " + Scrabble.score("meow"));
+console.log("grape score is " + Scrabble.score("grape"));
+console.log("aarrghh score is " + Scrabble.score("aarrghh"));
 
 // A 7 letter word wins.
 var words = ["cat", "meow", "grape", "date", "aarrghh"];
-console.log(Scoring.highestScoreFrom(words) + " should be aarrghh.");
+console.log(Scrabble.highestScoreFrom(words) + " should be aarrghh.");
 
 // A shorter word wins (meow and hatter have same score).
 var words = ["HATTER", "MEOW", "CAT"];
-console.log(Scoring.highestScoreFrom(words) + " should be meow.");
+console.log(Scrabble.highestScoreFrom(words) + " should be meow.");
 
 // A 7 letter word wins when same score as shorter word.
 var words = ["QZQZZX", "aerated"];
-console.log(Scoring.highestScoreFrom(words) + " should be aerated.");
+console.log(Scrabble.highestScoreFrom(words) + " should be aerated.");
 
 // Two words with the same score and same length should return the first of the two words.
 var words = ["FOOT", "TOMCAT", "KITTEN"];
-console.log(Scoring.highestScoreFrom(words) + " should be tomcat.");
+console.log(Scrabble.highestScoreFrom(words) + " should be tomcat.");
